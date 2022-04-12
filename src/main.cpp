@@ -11,6 +11,9 @@
 // See more at https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650.
 #include <analogWrite.h>
 
+// If distance from camera to XR Origin less than `MinMoveDelta`, no motor will move.
+// If distance from camera to XR Origin larger than `MaxSpeedDelta`, motors will move at max speed.
+// If distance is in [MinMoveDelta, MaxSpeedDelta], it will be linearly mapped to [0, MaxSpeed]
 const float MinMoveDelta = 0.05;
 const float MaxSpeedDelta = 0.2;
 
