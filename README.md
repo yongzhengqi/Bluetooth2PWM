@@ -4,9 +4,11 @@ This project is for ESP32 to get a coordinate from Oculus Quest via Bluetooth an
 
 ## Setup
 
-### Clion + PlatformIO
+### CLion + PlatformIO
 
-If you use Clion with PlatformIO, just clone this project and run configuration `PlatformIO Upload` in Clion, and you are good to go.
+If you use CLion with PlatformIO, just clone this project, and you are ready to code.
+
+To upload the program to ESP32, run configuration `PlatformIO Upload` in CLion.
 
 ### Arduino IDE
 

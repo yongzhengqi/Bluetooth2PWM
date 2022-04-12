@@ -30,7 +30,6 @@ private:
     int _pin2;
     int _pinSpeed;
 
-    int _speed;
     int MAX_SPEED;
 public:
     Motor() = default;
@@ -44,20 +43,17 @@ public:
         pinMode(_pin2, OUTPUT);
         pinMode(_pinSpeed, OUTPUT);
 
-        _speed = 0;
         MAX_SPEED = MaxSpeed;
     }
 
     void stop() {
-        _speed = 0;
         analogWrite(_pinSpeed, 0);
     }
 
     void run(int speed) {
-        _speed += speed;
-        _speed = max(min(_speed, MAX_SPEED), -MAX_SPEED);
+        speed = max(min(speed, MAX_SPEED), -MAX_SPEED);
 
-        if (_speed > 0) {
+        if (speed > 0) {
             digitalWrite(_pin1, HIGH);
             digitalWrite(_pin2, LOW);
         } else {
@@ -65,7 +61,7 @@ public:
             digitalWrite(_pin1, LOW);
         }
 
-        int abs_speed = abs(_speed);
+        int abs_speed = abs(speed);
         analogWrite(_pinSpeed, abs_speed);
     }
 };
@@ -77,8 +73,8 @@ BluetoothSerial BTSerial;
 void setup() {
     pinMode (LedPin, OUTPUT);
 
-    xMotor = Motor(2, 3, 9);
-    yMotor = Motor(4, 5, 10);
+    xMotor = Motor(12, 13, 25);
+    yMotor = Motor(14, 27, 26);
 
     // Required by Lou, the name of Bluetooth has to be set as `Lou_ESP32`.
     BTSerial.begin("Lou_ESP32");
@@ -102,6 +98,10 @@ int distance2speed(float d) {
 void loop() {
     if (!BTSerial.available()) {
         digitalWrite (LedPin, LOW);
+
+        xMotor.stop();
+        yMotor.stop();
+
         Serial.println("No Bluetooth input.");
         return;
     }
@@ -123,11 +123,9 @@ void loop() {
 
     int speed_x = distance2speed(x);
     Serial.printf("X axis motor running at %d\n", speed_x);
-    xMotor.stop();
     xMotor.run(speed_x);
 
     int speed_y = distance2speed(y);
     Serial.printf("Y axis motor running at %d\n", speed_y);
-    yMotor.stop();
     yMotor.run(speed_y);
 }
