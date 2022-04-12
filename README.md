@@ -10,7 +10,7 @@ If you use Clion with PlatformIO, just clone this project and run configuration 
 
 ### Arduino IDE
 
-If you code in Arduino IDE, copy content from `src/main.cpp` into Arduino IDE and upload the program as you usually do.
+If you code in Arduino IDE, install [ESP32-ESP32S2-AnalogWrite](https://github.com/Dlloydev/ESP32-ESP32S2-AnalogWrite) first. Then copy content from `src/main.cpp` into Arduino IDE and upload the program as you usually do.
 
 ## Reference
 

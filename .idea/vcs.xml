@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/ESP32-ESP32S2-AnalogWrite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/ESP32_AnalogWrite" vcs="Git" />
   </component>
 </project>
