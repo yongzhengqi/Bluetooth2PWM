@@ -1,8 +1,22 @@
-#include <Arduino.h>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <iostream>
 
-// Because ESP32 developers never wrote an analogWrite function for the ESP32. See more at
-// https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650
-#define analogWrite ledcWrite
+#include <Arduino.h>
+#include <BluetoothSerial.h>
+
+// ESP32 developers never wrote an analogWrite function for the ESP32. So `ESP32-AnalogWrite` in `lib/` is imported.
+// See more at https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650.
+#include <analogWrite.h>
+
+const float MinMoveDelta = 0.05;
+const float MaxSpeedDelta = 0.2;
+
+// Board specific constants.
+const int LedPin = 2;
+const int MaxSpeed = 255;
 
 // Control a DC motor with a L298N control board.
 // Example:
@@ -31,7 +45,7 @@ public:
         pinMode(_pinSpeed, OUTPUT);
 
         _speed = 0;
-        MAX_SPEED = 255;
+        MAX_SPEED = MaxSpeed;
     }
 
     void stop() {
@@ -52,63 +66,68 @@ public:
         }
 
         int abs_speed = abs(_speed);
-        Serial.println(abs_speed);
         analogWrite(_pinSpeed, abs_speed);
     }
 };
 
-Motor leftMotor, rightMotor;
+Motor xMotor, yMotor;
+
+BluetoothSerial BTSerial;
 
 void setup() {
-    leftMotor = Motor(2, 3, 9);
-    rightMotor = Motor(4, 5, 10);
+    pinMode (LedPin, OUTPUT);
+
+    xMotor = Motor(2, 3, 9);
+    yMotor = Motor(4, 5, 10);
+
+    // Required by Lou, the name of Bluetooth has to be set as `Lou_ESP32`.
+    BTSerial.begin("Lou_ESP32");
 
     Serial.begin(9600);
 }
 
+int distance2speed(float d) {
+    int direction = d > 0 ? -1 : 1;
+    d = abs(d);
+    if (d < MinMoveDelta) {
+        return 0;
+    } else if (d > MaxSpeedDelta) {
+        return MaxSpeed * direction;
+    } else {
+        int abs_speed = int(float(MaxSpeed) * (d - MinMoveDelta) / (MaxSpeedDelta - MinMoveDelta));
+        return abs_speed * direction;
+    }
+}
+
 void loop() {
-//    if (Serial.available() <= 0) {
-//        return;
-//    }
-//
-//    Serial.println("Start parsing the command.");
-//
-//    leftMotor.stop();
-//    rightMotor.stop();
-//
-//    String command = Serial.readString();
-//    command.toLowerCase();
-//
-//    if (command.indexOf(STOP) >= 0) {
-//        leftMotor.stop();
-//        rightMotor.stop();
-//        Serial.println("Command: stop\nIgnoring other commands.");
-//        return;
-//    }
-//
-//    if (command.indexOf(LEFT) >= 0) {
-//        leftMotor.run(-HALF_SPEED);
-//        rightMotor.run(HALF_SPEED);
-//        Serial.println("Command: left");
-//    } else if (command.indexOf(RIGHT) >= 0) {
-//        leftMotor.run(HALF_SPEED);
-//        rightMotor.run(-HALF_SPEED);
-//        Serial.println("Command: right");
-//    }
-//    if (command.indexOf(UP) >= 0) {
-//        leftMotor.run(HALF_SPEED);
-//        rightMotor.run(HALF_SPEED);
-//        Serial.println("Command: up");
-//    } else if (command.indexOf(DOWN) >= 0) {
-//        leftMotor.run(-HALF_SPEED);
-//        rightMotor.run(-HALF_SPEED);
-//        Serial.println("Command: down");
-//    }
-//
-//    Serial.println("Command parsed.");
-//
-//    delay(3000);
-//
-//    leftMotor.stop();
-//    rightMotor.stop();
+    if (!BTSerial.available()) {
+        digitalWrite (LedPin, LOW);
+        Serial.println("No Bluetooth input.");
+        return;
+    }
+
+    digitalWrite (LedPin, HIGH);
+
+    String arduino_data = BTSerial.readStringUntil(')');
+    std::string cpp_data(arduino_data.c_str());
+    std::stringstream coordinates_str_stream(cpp_data);
+
+    float x, y;
+    char comma, open_paren;
+    if (!(coordinates_str_stream >> open_paren >> x >> comma >> y)) {
+        Serial.printf("Two floats are expected, but got %s instead.\n", arduino_data.c_str());
+        return;
+    }
+
+    Serial.printf("(%f, %f)\n", x, y);
+
+    int speed_x = distance2speed(x);
+    Serial.printf("X axis motor running at %d\n", speed_x);
+    xMotor.stop();
+    xMotor.run(speed_x);
+
+    int speed_y = distance2speed(y);
+    Serial.printf("Y axis motor running at %d\n", speed_y);
+    yMotor.stop();
+    yMotor.run(speed_y);
 }
