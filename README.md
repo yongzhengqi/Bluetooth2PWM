@@ -1,14 +1,12 @@
 # Bluetooth2PWM
 
-This project is for ESP32 to get a coordinate from Oculus Quest via Bluetooth and then control L298N to move accordingly via analog signals.
+This project is for ESP32 to get a coordinate from Oculus Quest via Bluetooth and then control L298N to move accordingly via (PWM simulated) analog signals.
 
 ## Setup
 
 ### CLion + PlatformIO
 
-If you use CLion with PlatformIO, just clone this project, and you are ready to code.
-
-To upload the program to ESP32, run configuration `PlatformIO Upload` in CLion.
+If you use CLion with PlatformIO, just clone this project, and you are ready to code. To upload the program to ESP32, run configuration `PlatformIO Upload` in CLion.
 
 ### Arduino IDE
 
