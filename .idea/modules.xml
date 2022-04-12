@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Bluetooth2PWM.iml" filepath="$PROJECT_DIR$/.idea/Bluetooth2PWM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/untitled.iml" filepath="$PROJECT_DIR$/.idea/untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Bluetooth2PWM2.iml" filepath="$PROJECT_DIR$/.idea/Bluetooth2PWM2.iml" />
     </modules>
   </component>
 </project>

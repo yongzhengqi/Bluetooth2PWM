@@ -4,12 +4,14 @@
 // https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650
 #define analogWrite ledcWrite
 
-// See more at https://create.arduino.cc/projecthub/ryanchan/how-to-use-the-l298n-motor-driver-b124c5
-
-
-
+// Control a DC motor with a L298N control board.
+// Example:
+//    motor = Motor(2, 3, 9);  // Number 2, 3, and 9 is the pin # you connect on ESP32.
+//    motor.run(speed);  // Speed should be a int in (0, 255].
 class Motor {
 private:
+    // A L298N requires 3 pins to control one motor. First two pins are used to control direction. And the third pin is
+    // used to control speed with an analog signal. See more at https://create.arduino.cc/projecthub/ryanchan/how-to-use-the-l298n-motor-driver-b124c5
     int _pin1;
     int _pin2;
     int _pinSpeed;
@@ -55,8 +57,6 @@ public:
     }
 };
 
-int HALF_SPEED = 100;
-String LEFT, RIGHT, UP, DOWN, STOP;
 Motor leftMotor, rightMotor;
 
 void setup() {
@@ -64,57 +64,51 @@ void setup() {
     rightMotor = Motor(4, 5, 10);
 
     Serial.begin(9600);
-
-    LEFT = "left";
-    RIGHT = "right";
-    UP = "up";
-    DOWN = "down";
-    STOP = "stop";
 }
 
 void loop() {
-    if (Serial.available() <= 0) {
-        return;
-    }
-
-    Serial.println("Start parsing the command.");
-
-    leftMotor.stop();
-    rightMotor.stop();
-
-    String command = Serial.readString();
-    command.toLowerCase();
-
-    if (command.indexOf(STOP) >= 0) {
-        leftMotor.stop();
-        rightMotor.stop();
-        Serial.println("Command: stop\nIgnoring other commands.");
-        return;
-    }
-
-    if (command.indexOf(LEFT) >= 0) {
-        leftMotor.run(-HALF_SPEED);
-        rightMotor.run(HALF_SPEED);
-        Serial.println("Command: left");
-    } else if (command.indexOf(RIGHT) >= 0) {
-        leftMotor.run(HALF_SPEED);
-        rightMotor.run(-HALF_SPEED);
-        Serial.println("Command: right");
-    }
-    if (command.indexOf(UP) >= 0) {
-        leftMotor.run(HALF_SPEED);
-        rightMotor.run(HALF_SPEED);
-        Serial.println("Command: up");
-    } else if (command.indexOf(DOWN) >= 0) {
-        leftMotor.run(-HALF_SPEED);
-        rightMotor.run(-HALF_SPEED);
-        Serial.println("Command: down");
-    }
-
-    Serial.println("Command parsed.");
-
-    delay(3000);
-
-    leftMotor.stop();
-    rightMotor.stop();
+//    if (Serial.available() <= 0) {
+//        return;
+//    }
+//
+//    Serial.println("Start parsing the command.");
+//
+//    leftMotor.stop();
+//    rightMotor.stop();
+//
+//    String command = Serial.readString();
+//    command.toLowerCase();
+//
+//    if (command.indexOf(STOP) >= 0) {
+//        leftMotor.stop();
+//        rightMotor.stop();
+//        Serial.println("Command: stop\nIgnoring other commands.");
+//        return;
+//    }
+//
+//    if (command.indexOf(LEFT) >= 0) {
+//        leftMotor.run(-HALF_SPEED);
+//        rightMotor.run(HALF_SPEED);
+//        Serial.println("Command: left");
+//    } else if (command.indexOf(RIGHT) >= 0) {
+//        leftMotor.run(HALF_SPEED);
+//        rightMotor.run(-HALF_SPEED);
+//        Serial.println("Command: right");
+//    }
+//    if (command.indexOf(UP) >= 0) {
+//        leftMotor.run(HALF_SPEED);
+//        rightMotor.run(HALF_SPEED);
+//        Serial.println("Command: up");
+//    } else if (command.indexOf(DOWN) >= 0) {
+//        leftMotor.run(-HALF_SPEED);
+//        rightMotor.run(-HALF_SPEED);
+//        Serial.println("Command: down");
+//    }
+//
+//    Serial.println("Command parsed.");
+//
+//    delay(3000);
+//
+//    leftMotor.stop();
+//    rightMotor.stop();
 }
