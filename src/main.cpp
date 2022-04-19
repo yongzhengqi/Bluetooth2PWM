@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 
+#include <Servo.h>
 #include <Arduino.h>
 #include <BluetoothSerial.h>
 
@@ -85,19 +86,6 @@ void setup() {
     Serial.begin(9600);
 }
 
-int distance2speed(float d) {
-    int direction = d > 0 ? -1 : 1;
-    d = abs(d);
-    if (d < MinMoveDelta) {
-        return 0;
-    } else if (d > MaxSpeedDelta) {
-        return MaxSpeed * direction;
-    } else {
-        int abs_speed = int(float(MaxSpeed) * (d - MinMoveDelta) / (MaxSpeedDelta - MinMoveDelta));
-        return abs_speed * direction;
-    }
-}
-
 void loop() {
     if (!BTSerial.available()) {
         digitalWrite (LedPin, LOW);
@@ -115,14 +103,14 @@ void loop() {
     std::string cpp_data(arduino_data.c_str());
     std::stringstream coordinates_str_stream(cpp_data);
 
-    float x, y;
+    float xSpeedRatio, ySpeedRatio;
     char comma, open_paren;
-    if (!(coordinates_str_stream >> open_paren >> x >> comma >> y)) {
+    if (!(coordinates_str_stream >> open_paren >> xSpeedRatio >> comma >> ySpeedRatio)) {
         Serial.printf("Two floats are expected, but got %s instead.\n", arduino_data.c_str());
         return;
     }
 
-    Serial.printf("(%f, %f)\n", x, y);
+    Serial.printf("(%f, %f)\n", xSpeedRatio, xSpeedRatio);
 
     int speed_x = distance2speed(x);
     Serial.printf("X axis motor running at %d\n", speed_x);

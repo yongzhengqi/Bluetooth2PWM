@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+  <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="bluetooth2pwm" targetName="Z_DUMMY_TARGET" />
       <config projectName="bluetooth2pwm" targetName="Production" />
@@ -14,11 +14,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d3b496b-9593-4a1a-8974-d5f65793907c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Bluetooth2PWM.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeListsPrivate.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Bluetooth2PWM2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Bluetooth2PWM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bluetooth2PWM.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +46,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="cf.first.check.clang-format" value="false" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "cmake.loaded.for.project": "true"
+  }
+}]]></component>
   <component name="RunManager" selected="PlatformIO.PlatformIO Upload">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -101,7 +99,9 @@
       <workItem from="1649769079467" duration="11230000" />
       <workItem from="1649790366960" duration="1219000" />
       <workItem from="1649795352725" duration="418000" />
-      <workItem from="1650330569031" duration="393000" />
+      <workItem from="1650330569031" duration="487000" />
+      <workItem from="1650331117088" duration="263000" />
+      <workItem from="1650331439938" duration="435000" />
     </task>
     <task id="LOCAL-00001" summary="Add comments to the Motor class.">
       <created>1649734201628</created>
@@ -138,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649791518414</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update CLion project configuration files.">
+      <created>1650331051419</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650331051419</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +160,7 @@
     <MESSAGE value="Update README.md." />
     <MESSAGE value="Add comments to main.cpp" />
     <MESSAGE value="Update CMake files to include required libs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update CMake files to include required libs." />
+    <MESSAGE value="Update CLion project configuration files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update CLion project configuration files." />
   </component>
 </project>
