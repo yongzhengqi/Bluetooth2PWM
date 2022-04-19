@@ -116,7 +116,7 @@ void loop() {
         return;
     }
 
-    Serial.printf("Data from Bluetooth: (%f, %f)\n", x_speed_ratio, x_speed_ratio);
+    Serial.printf("Data from Bluetooth: (%f, %f)\n", x_speed_ratio, y_speed_ratio);
 
     int x_speed = ratio2speed(x_speed_ratio);
     xServo.write(x_speed);
