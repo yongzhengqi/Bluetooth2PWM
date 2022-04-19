@@ -11,8 +11,9 @@
 // See more at https://github.com/madhephaestus/ESP32Servo
 #include <ESP32Servo.h>
 
-// ESP32 developers never wrote an analogWrite function for the ESP32. So `ESP32-AnalogWrite` in `lib/` is imported.
-// See more at https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650.
+// ESP32 developers never wrote an analogWrite function for the ESP32. So, a third party implementation from
+// `ESP32-Servo` is used.
+// See more at https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650
 #include <analogWrite.h>
 
 // Board specific constants.

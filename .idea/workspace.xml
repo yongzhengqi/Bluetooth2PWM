@@ -14,25 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d3b496b-9593-4a1a-8974-d5f65793907c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/Knob/Knob.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/Multiple-Servo-Example-Arduino/Multiple-Servo-Example-Arduino.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/PWMExample/PWMExample.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/Sweep/Sweep.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/ToneExample/ToneExample.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/examples/analogWriteExample/analogWriteExample.ino" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/library.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32PWM.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32PWM.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32Servo.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32Servo.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32Tone.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/ESP32Tone.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/analogWrite.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ESP32-Servo/src/analogWrite.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Servo/keywords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ESP32-Servo/keywords.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +98,7 @@
       <workItem from="1649795352725" duration="418000" />
       <workItem from="1650330569031" duration="487000" />
       <workItem from="1650331117088" duration="263000" />
-      <workItem from="1650331439938" duration="3734000" />
+      <workItem from="1650331439938" duration="3821000" />
     </task>
     <task id="LOCAL-00001" summary="Add comments to the Motor class.">
       <created>1649734201628</created>
@@ -175,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650334290624</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Include ESP32 Servo lib.">
+      <created>1650335392263</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650335392263</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
