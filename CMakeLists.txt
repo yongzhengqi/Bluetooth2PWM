@@ -10,8 +10,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
 
-include_directories(lib/ESP32-AnalogWrite/)
-include_directories(lib/Servo/src)
+include_directories(lib/ESP32-Servo/src)
 
 project("bluetooth2pwm" C CXX)
 

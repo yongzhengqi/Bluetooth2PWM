@@ -16,4 +16,4 @@ If you code in Arduino IDE, install [ESP32-ESP32S2-AnalogWrite](https://github.c
 
 - More on how to control a L298N: https://create.arduino.cc/projecthub/ryanchan/how-to-use-the-l298n-motor-driver-b124c5
 - More on PlatformIO with ESP32: https://docs.platformio.org/en/latest/platforms/espressif32.html
-- More on `AnalogWrite` with ESP32: https://github.com/Dlloydev/ESP32-ESP32S2-AnalogWrite
+- More on `AnalogWrite` and `Servo` with ESP32: https://github.com/madhephaestus/ESP32Servo 

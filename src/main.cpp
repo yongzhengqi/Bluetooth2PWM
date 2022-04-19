@@ -4,23 +4,20 @@
 #include <sstream>
 #include <iostream>
 
-#include <Servo.h>
 #include <Arduino.h>
 #include <BluetoothSerial.h>
+
+// ESP32 developers never wrote a Servo library for the ESP32. So `ESP32-Servo` in `lib/` is imported.
+// See more at https://github.com/madhephaestus/ESP32Servo
+#include <ESP32Servo.h>
 
 // ESP32 developers never wrote an analogWrite function for the ESP32. So `ESP32-AnalogWrite` in `lib/` is imported.
 // See more at https://forum.arduino.cc/t/problem-to-compile-with-esp32-board-after-board-support-installation-success/627650.
 #include <analogWrite.h>
 
-// If distance from camera to XR Origin less than `MinMoveDelta`, no motor will move.
-// If distance from camera to XR Origin larger than `MaxSpeedDelta`, motors will move at max speed.
-// If distance is in [MinMoveDelta, MaxSpeedDelta], it will be linearly mapped to [0, MaxSpeed]
-const float MinMoveDelta = 0.05;
-const float MaxSpeedDelta = 0.2;
-
 // Board specific constants.
 const int LedPin = 2;
-const int MaxSpeed = 255;
+const int DcMotorMaxSpeed = 255;
 
 // Control a DC motor with a L298N control board.
 // Example:
@@ -47,7 +44,7 @@ public:
         pinMode(_pin2, OUTPUT);
         pinMode(_pinSpeed, OUTPUT);
 
-        MAX_SPEED = MaxSpeed;
+        MAX_SPEED = DcMotorMaxSpeed;
     }
 
     void stop() {
@@ -70,15 +67,20 @@ public:
     }
 };
 
-Motor xMotor, yMotor;
+Motor leftMotor, rightMotor;
+
+Servo xServo, yServo;
 
 BluetoothSerial BTSerial;
 
 void setup() {
     pinMode (LedPin, OUTPUT);
 
-    xMotor = Motor(12, 13, 25);
-    yMotor = Motor(14, 27, 26);
+    leftMotor = Motor(12, 13, 25);
+    rightMotor = Motor(14, 27, 26);
+
+    xServo.attach(9);
+    yServo.attach(10);
 
     // Required by Lou, the name of Bluetooth has to be set as `Lou_ESP32`.
     BTSerial.begin("Lou_ESP32");
@@ -86,12 +88,16 @@ void setup() {
     Serial.begin(9600);
 }
 
+int ratio2speed(float ratio) {
+    return int(ratio * 90) + 90;
+}
+
 void loop() {
     if (!BTSerial.available()) {
         digitalWrite (LedPin, LOW);
 
-        xMotor.stop();
-        yMotor.stop();
+        leftMotor.stop();
+        rightMotor.stop();
 
         Serial.println("No Bluetooth input.");
         return;
@@ -103,20 +109,20 @@ void loop() {
     std::string cpp_data(arduino_data.c_str());
     std::stringstream coordinates_str_stream(cpp_data);
 
-    float xSpeedRatio, ySpeedRatio;
+    float x_speed_ratio, y_speed_ratio;
     char comma, open_paren;
-    if (!(coordinates_str_stream >> open_paren >> xSpeedRatio >> comma >> ySpeedRatio)) {
+    if (!(coordinates_str_stream >> open_paren >> x_speed_ratio >> comma >> y_speed_ratio)) {
         Serial.printf("Two floats are expected, but got %s instead.\n", arduino_data.c_str());
         return;
     }
 
-    Serial.printf("(%f, %f)\n", xSpeedRatio, xSpeedRatio);
+    Serial.printf("Data from Bluetooth: (%f, %f)\n", x_speed_ratio, x_speed_ratio);
 
-    int speed_x = distance2speed(x);
-    Serial.printf("X axis motor running at %d\n", speed_x);
-    xMotor.run(speed_x);
+    int x_speed = ratio2speed(x_speed_ratio);
+    xServo.write(x_speed);
+    Serial.printf("X axis servo running at %d (0~180)\n", x_speed);
 
-    int speed_y = distance2speed(y);
-    Serial.printf("Y axis motor running at %d\n", speed_y);
-    yMotor.run(speed_y);
+    int y_speed = ratio2speed(y_speed_ratio);
+    yServo.write(y_speed);
+    Serial.printf("Y axis servo running at %d (0~180)\n", y_speed);
 }
